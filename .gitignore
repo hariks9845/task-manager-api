@@ -1,0 +1,13 @@
+# Python environment
+venv/
+*.pyc
+__pycache__/
+
+# Database & local secrets
+db.sqlite3
+.env
+
+# Testing & IDEs
+.vscode/
+.idea/
+.pytest_cache/
