@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
 
-# Simple view for root path
 def api_root(request):
     return JsonResponse({
         "message": "Task Manager API is Live!",
@@ -15,7 +14,7 @@ def api_root(request):
     })
 
 urlpatterns = [
-    path('', api_root),  # Handles root '/'
+    path('', api_root),
     path('admin/', admin.site.urls),
-    path('api/', include('tasks.urls')),  # Replace with your app name if different
+    path('api/', include('api.urls')),  # <-- Make sure 'api.urls' matches your app folder name!
 ]
