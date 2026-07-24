@@ -16,5 +16,5 @@ def api_root(request):
 urlpatterns = [
     path('', api_root),
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),  # <-- Make sure 'api.urls' matches your app folder name!
+    path('api/', include('task_manager.urls')),  # <-- Make sure 'api.urls' matches your app folder name!
 ]
