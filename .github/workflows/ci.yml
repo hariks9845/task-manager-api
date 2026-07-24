@@ -1,4 +1,4 @@
-name: Django REST Framework CI/CD Pipeline
+name: Django CI/CD Pipeline
 
 on:
   push:
@@ -7,15 +7,15 @@ on:
     branches: ["main"]
 
 jobs:
-  test-and-build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
@@ -24,10 +24,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Migrations Check
+      - name: Check for Unapplied Migrations
+        run: |
+          python manage.py makemigrations --check --dry-run
+
+      - name: Apply Migrations
         run: |
           python manage.py migrate
 
-      - name: Run Unit Tests
+      - name: Run Unit & Integration Tests
         run: |
           python manage.py test
